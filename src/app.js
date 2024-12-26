@@ -1,5 +1,4 @@
 import { resolve } from 'path';
-
 import './database';
 
 import express from 'express';
@@ -12,16 +11,17 @@ import tokenRoutes from './routes/tokenRoutes';
 import alunoRoutes from './routes/alunoRoutes';
 import fotoRoutes from './routes/fotoRoutes';
 
+// Lista branca de origens permitidas
 const whiteList = [
+  'http://localhost:3000', 
   '52.41.36.82', 
   '54.191.253.12', 
   'https://api-rest-curso.onrender.com',
-  'http://localhost:3001',
 ];
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if(whiteList.indexOf(origin) !== -1 || !origin) {
+    if (whiteList.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
